@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "45830351220",
+    "project_id": "account-management-4ce5a",
+    "storage_bucket": "account-management-4ce5a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45830351220:android:57ced7822f5d8e2a50e421",
+        "android_client_info": {
+          "package_name": "com.example.account_management"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1H5V7384c3v94SzQ4yPznWk0qfbw5S3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
