@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'package:account_management/new/components/new_home_screen.dart';
-import 'package:account_management/new/services/local_storage_manager.dart';
-import 'package:account_management/view/authentication/login_page.dart';
 import 'package:account_management/view/home_screen/home_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:account_management/services/account_manager/local_storage_manager.dart';
+import 'package:account_management/view/authentication/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,14 +16,13 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    final userId = FirebaseAuth.instance.currentUser?.uid;
     final isLoggedIn = LocalAccountManager().getLoggedIn();
     timer = Timer.periodic(
         const Duration(seconds: 3),
         (v) => Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) {
-                  return !isLoggedIn ? const LoginPage() : NewHomeScreen();
+                  return !isLoggedIn ? const LoginPage() : const HomeScreen();
                 },
               ),
             ));
@@ -57,11 +54,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // LottieBuilder.asset(
-                  //   "assets/animations/02d.json",
-                  //   height: 200,
-                  //   width: 200,
-                  // ),
                   Text(
                     "Account Management",
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(

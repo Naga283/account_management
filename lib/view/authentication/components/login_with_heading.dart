@@ -13,19 +13,6 @@ class IconWithHeadingAndSubHeading extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
-        // Center(
-        //   child: Container(
-        //     padding: EdgeInsets.all(14),
-        //     decoration: BoxDecoration(
-        //       border: Border.all(width: 1),
-        //       shape: BoxShape.circle,
-        //     ),
-        //     child: SvgPicture.asset(
-        //       "assets/images/login/book-4986.svg",
-        //       width: 50,
-        //     ),
-        //   ),
-        // ),
         Padding(
           padding: const EdgeInsets.only(
             top: 50.0,

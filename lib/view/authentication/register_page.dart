@@ -1,6 +1,6 @@
 import 'package:account_management/common/expanded_btn.dart';
-import 'package:account_management/new/services/local_storage_manager.dart';
-import 'package:account_management/new/services/login_fun.dart';
+import 'package:account_management/services/account_manager/local_storage_manager.dart';
+import 'package:account_management/services/account_manager/authentication.dart';
 import 'package:account_management/providers/authentication/profile_pic_state_provider.dart';
 import 'package:account_management/providers/authentication/signup_page/btn_loading_state_provider.dart';
 import 'package:account_management/providers/authentication/signup_page/is_password_visible_state_provider.dart';

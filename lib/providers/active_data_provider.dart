@@ -1,4 +1,4 @@
-import 'package:account_management/new/services/local_storage_manager.dart';
+import 'package:account_management/services/account_manager/local_storage_manager.dart';
 import 'package:flutter/material.dart';
 
 class ActiveAccountNotifier extends ValueNotifier<Map<String, dynamic>?> {
@@ -10,7 +10,6 @@ class ActiveAccountNotifier extends ValueNotifier<Map<String, dynamic>?> {
   void switchAccount(String uid) async {
     await accountManager.setActiveAccount(uid);
     value = accountManager.getActiveAccountDetails();
-    print("values :: ${value.toString()}");
   }
 
   void refresh() {

@@ -1,23 +1,27 @@
-import 'package:account_management/common/am_dailog.dart';
+// ignore_for_file: deprecated_member_use
+
 import 'package:account_management/common/expanded_btn.dart';
-import 'package:account_management/notifiers/get_account_details_notifier.dart';
-import 'package:account_management/providers/added_images_state_provider.dart';
-import 'package:account_management/services/add/add.dart';
-import 'package:account_management/services/firebase_authentication_services.dart';
-import 'package:account_management/view/home_screen/components/home_screen_body.dart';
+import 'package:account_management/view/home_screen/custom_drawer.dart';
+import 'package:account_management/providers/active_data_provider.dart';
+import 'package:account_management/services/account_manager/local_storage_manager.dart';
+import 'package:account_management/view/home_screen/components/home_screen_card.dart';
 import 'package:account_management/view/home_screen/components/pop_up_method.dart';
-import 'package:account_management/view/home_screen/customer_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
+
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  TextEditingController nameController = TextEditingController();
+  final LocalAccountManager accountManager = LocalAccountManager();
+  Map<String, dynamic>? activeAccountDetails;
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController updateController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -25,9 +29,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final getAccountDetails = ref.watch(getAccountDetailsFutureProvider);
-    final images = ref.watch(addImageChangeNotifierProvider);
-
+    final accountManager = LocalAccountManager();
+    final activeAccountNotifier = ActiveAccountNotifier(accountManager);
     return WillPopScope(
       onWillPop: () async {
         final exit = await popUpMethod(context);
@@ -35,59 +38,59 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return exit ?? false; // Return true to exit, false to stay
       },
       child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text("Home Screen"),
-          actions: [
-            IconButton(
-                onPressed: () async {
-                  await amDailog(
-                      context, "Are You Sure", "You want to logout", "",
-                      () async {
-                    await logoutUser(context, ref);
-                  });
-                },
-                icon: const Icon(Icons.logout)),
-            const SizedBox(
-              width: 20,
-            )
-          ],
+        appBar: AppBar(title: const Text('Home')),
+        drawer: NewCustomDrawer(
+          activeAccountNotifier: activeAccountNotifier,
         ),
-        drawer: CustomDrawer(),
-        body: getAccountDetails.when(data: (accDet) {
-          return HomeScreenBody(
-            images: images,
-            accDet: accDet,
-          );
-        }, error: (error, sT) {
-          return const Text("error");
-        }, loading: () {
-          return const Center(child: CircularProgressIndicator());
-        }),
+        body: ValueListenableBuilder(
+            valueListenable: activeAccountNotifier,
+            builder: (context, data, _) {
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Active Account: ${data?['email'] ?? "None"}'),
+                    const SizedBox(height: 10),
+                    ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: data?["listData"].length,
+                        itemBuilder: (context, index) {
+                          return HomeScreenCard(
+                            updateController: updateController,
+                            accountManager: accountManager,
+                            activeAccountNotifier: activeAccountNotifier,
+                            index: index,
+                            name: data?["listData"][index]['name'],
+                          );
+                        })
+                  ],
+                ),
+              );
+            }),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             await showAdaptiveDialog(
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: Text("Add"),
+                    title: const Text("Add"),
                     content: TextFormField(
                       controller: nameController,
                     ),
                     actions: [
                       ExpandedElevatedBtn(
                           btnName: "Add",
-                          onTap: () async {
-                            await addDataToFirestore(nameController.text);
+                          onTap: () {
+                            accountManager.addNameValue(
+                                title: nameController.text);
+                            activeAccountNotifier.refresh();
+                            nameController.clear();
+                            Navigator.of(context).pop();
                           })
                     ],
                   );
                 });
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //     builder: (context) => const AddOrEditAccountScreen(),
-            //   ),
-            // );
           },
           child: const Icon(Icons.add),
         ),

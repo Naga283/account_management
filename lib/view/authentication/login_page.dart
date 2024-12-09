@@ -1,15 +1,12 @@
 import 'package:account_management/common/expanded_btn.dart';
-import 'package:account_management/new/components/view/registration_page.dart';
-import 'package:account_management/new/services/local_storage_manager.dart';
-import 'package:account_management/new/services/login_fun.dart';
+import 'package:account_management/services/account_manager/authentication.dart';
 import 'package:account_management/providers/authentication/login_page/is_login_password_visible_state_provider.dart';
 import 'package:account_management/providers/authentication/signup_page/btn_loading_state_provider.dart';
-import 'package:account_management/services/firebase_authentication_services.dart';
 import 'package:account_management/utils/colors.dart';
 import 'package:account_management/utils/validations.dart';
 import 'package:account_management/common/am_textformfield.dart';
-import 'package:account_management/view/authentication/login_with_heading.dart';
-import 'package:account_management/view/authentication/password_textform_field.dart';
+import 'package:account_management/view/authentication/components/password_textform_field.dart';
+import 'package:account_management/view/authentication/components/login_with_heading.dart';
 import 'package:account_management/view/authentication/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -116,12 +113,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             if (_formKey.currentState?.validate() ?? false) {
               await login(
                   emailController.text, passwordController.text, context);
-              // await loginWithEmailAndPassword(
-              //   emailController.text,
-              //   passwordController.text,
-              //   context,
-              //   ref,
-              // );
             }
           },
         ),
