@@ -1,10 +1,10 @@
-# account_management
+# User Account Management
 
-A new Flutter project.
+Once User logged in he can login with multiple accounts and manage that login accounts
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+<img src = "https://github.com/user-attachments/assets/124e3687-826c-4928-b097-8725683eb2d8" />
 
 A few resources to get you started if this is your first Flutter project:
 
