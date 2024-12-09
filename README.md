@@ -4,12 +4,12 @@ Once User logged in he can login with multiple accounts and manage that login ac
 
 ## Getting Started
 
-<img src = "https://github.com/user-attachments/assets/124e3687-826c-4928-b097-8725683eb2d8" />
-<img src="https://github.com/user-attachments/assets/be3bc46f-84f9-4845-ac57-cc71a00e023" />
-<img src="https://github.com/user-attachments/assets/32997234-8d9f-4613-93f2-d2150374208d" />
-<img src="https://github.com/user-attachments/assets/f1be487a-1b5f-43b3-92c0-d083e01ddc7f" />
-<img src="https://github.com/user-attachments/assets/907c0aaf-28a1-4f31-ae1a-ed1dc779c41a" />
-<img src="https://github.com/user-attachments/assets/907c0aaf-28a1-4f31-ae1a-ed1dc779c41a" />
+<img src = "https://github.com/user-attachments/assets/124e3687-826c-4928-b097-8725683eb2d8" height=400 width=200 />
+<img src="https://github.com/user-attachments/assets/be3bc46f-84f9-4845-ac57-cc71a00e023" height=400 width=200 />
+<img src="https://github.com/user-attachments/assets/32997234-8d9f-4613-93f2-d2150374208d" height=400 width=200 />
+<img src="https://github.com/user-attachments/assets/f1be487a-1b5f-43b3-92c0-d083e01ddc7f" height=400 width=200/>
+<img src="https://github.com/user-attachments/assets/907c0aaf-28a1-4f31-ae1a-ed1dc779c41a" height=400 width=200/>
+<img src="https://github.com/user-attachments/assets/907c0aaf-28a1-4f31-ae1a-ed1dc779c41a" height=400 width=200/>
 
 A few resources to get you started if this is your first Flutter project:
 
